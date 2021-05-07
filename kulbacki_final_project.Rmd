@@ -29,7 +29,7 @@ ramen_ratings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascie
 
 ## Question 1
 
-#### In Japan, what is the most frequent number of star ratings?
+#### In Japan, what style of packaging is liked the least?
 
 ### Methods
 ```{r}
@@ -44,27 +44,16 @@ ramen_ratings %>%
   filter(country == "Japan") %>%
   # select specific rows, in this case stars and country 
   select(stars, country, style) %>% 
+  ggplot() + 
+  aes(x = style) + 
+  geom_histogram(stat = "count")
   
-  View()  -> ramen_data1
 
-# pipe in the wrangled data
-ramen_data1 %>%
-# ggplot function
-ggplot() + 
-  # style on x axis  
-  aes(x = style, y = stars) +
-  # make a histogram  
-  geom_col(color = "black", fill = "pink") +
-  labs(x= "number of stars") +
-  # add non-default theme of choice
-  theme_bw() -> ramen_histogram
-
-print(ramen_histogram)
 
 ```
 ### Answer
 
-Replace this text with your answer to your question.
+In Japan, box is the style that is liked the least.
 
 
 <br><br>
@@ -91,7 +80,6 @@ ggplot() +
   theme_bw() 
 
 
-
 ```
 ### Answer
 
@@ -101,23 +89,22 @@ In China, the ramen packaging style that most people seem to like is pack.
 
 ## Question 3
 
-#### Between the three brands of ramen Yum Yum, Nagatanien, Acecook, what is the most frequently sold.
+#### Between the these two brands of ramen Yum Yum and Nagatanien, what is the most frequently sold.
 
 ### Methods
 ```{r}
 
-#ramen_ratings %>%
-  #drop_na(brand) %>%
-  #filter(country == Thailand, brand == "Yum Yum", "	Nagatanien") 
-  #select(country, brand) %>%
-  #ggplot() + 
+ramen_ratings %>%
+  drop_na(brand) %>%
+  filter(country == Thailand, brand == "Yum Yum", "	Nagatanien") %>%
+  ggplot() + 
   # style on x axis  
-  #aes(x = brand) +
+  aes(x = brand) +
   # make a histogram  
-  #geom_bar(color = "black", fill = "pink") +
-  #labs(x= "brand") +
+  geom_bar(color = "black", fill = "pink") +
+  labs(x= "brand") +
   # add non-default theme of choice
-  #theme_bw() 
+  theme_bw() 
 
 
 ```
