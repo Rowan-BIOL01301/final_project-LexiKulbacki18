@@ -36,19 +36,21 @@ ramen_ratings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascie
 # view the data
 glimpse(ramen_ratings)
 
-# pipe in the data
+# pipe in the data from ramen_ratings
 ramen_ratings %>%
-  # drop rows with no answer for stars
+  # drop rows with no answer available for stars
    drop_na(stars) %>%
   # filter the country to be Japan
   filter(country == "Japan") %>%
   # select specific rows, in this case stars and country 
   select(stars, country, style) %>% 
+  # ggplot function
   ggplot() + 
+  # places style on the x-axis
   aes(x = style) + 
+  # makes a histogram
   geom_histogram(stat = "count")
   
-
 
 ```
 ### Answer
@@ -64,13 +66,14 @@ In Japan, box is the style that is liked the least.
 
 ### Methods
 ```{r}
-
+# pipe in the data from ramen_ratings
 ramen_ratings %>%
+  # drops rows with no answers available for style
   drop_na(style) %>%
-  filter(country == "China") -> ramendata2
-
-ramendata2 %>%
-ggplot() + 
+  # filters the country to be China
+  filter(country == "China") %>%
+  # ggplot function
+  ggplot() + 
   # style on x axis  
   aes(x = style) +
   # make a histogram  
@@ -89,14 +92,19 @@ In China, the ramen packaging style that most people seem to like is pack.
 
 ## Question 3
 
-#### Between the these two brands of ramen Yum Yum and Nagatanien, what is the most frequently sold.
+#### What brands of ramen does Australia have?
 
 ### Methods
 ```{r}
-
+# pipe in the data from ramen_ratings
 ramen_ratings %>%
+  # drops rows with no answers available for brand
   drop_na(brand) %>%
-  filter(country == Thailand, brand == "Yum Yum", "	Nagatanien") %>%
+  # fitlers the country to be Australia
+  filter(country == "Australia") %>%
+  # selects just rows that are the brand
+  select(brand) %>%
+  # ggplot function
   ggplot() + 
   # style on x axis  
   aes(x = brand) +
@@ -110,7 +118,7 @@ ramen_ratings %>%
 ```
 ### Answer
 
-Replace this text with your answer to your question.
+The brands of ramen in Australia have are Fantastic, Maggi, Singa-Me, Suimin and Trident.
 
 
 <br><br>
@@ -122,6 +130,17 @@ Replace this text with your answer to your question.
 ### Methods
 ```{r}
 
+#ramen_ratings %>%
+  #drop_na(brand) %>%
+  #filter(brand = "Myojo") %>% 
+  #ggplot() + 
+  # style on x axis  
+  #aes(x = brand) +
+  # make a histogram  
+  #geom_bar(color = "black", fill = "pink") +
+  #labs(x= "brand") +
+  # add non-default theme of choice
+  #theme_bw()
 
 
 
