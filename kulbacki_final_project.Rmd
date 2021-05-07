@@ -41,9 +41,11 @@ ramen_ratings %>%
   # drop rows with no answer for stars
    drop_na(stars) %>%
   # filter the country to be Japan
-  filter(country == "Japan", style %in% c("cup", "pack", "tray", "bowl")) %>%
+  filter(country == "Japan") %>%
   # select specific rows, in this case stars and country 
-  select(stars, country, style) -> ramen_data1
+  select(stars, country, style) %>% 
+  
+  View()  -> ramen_data1
 
 # pipe in the wrangled data
 ramen_data1 %>%
