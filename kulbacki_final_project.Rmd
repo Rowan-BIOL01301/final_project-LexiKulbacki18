@@ -2,7 +2,10 @@
 title: "Final Project"
 subtitle: "Data Science for Biologists, Spring 2021"
 author: "Alexis Kulbacki"
-output: html_document
+output: 
+  html_document:
+    theme: cerulean
+    highlight: haddock
 editor_options: 
   chunk_output_type: console
 ---
@@ -29,64 +32,67 @@ ramen_ratings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascie
 
 ## Question 1
 
-#### In Japan, what style of packaging is liked the least?
+#### In Japan, what style of packaging is liked the least according to its total star rating?
 
 ### Methods
-```{r}
+```{r Question 1}
 # view the data
 glimpse(ramen_ratings)
 
-# pipe in the data from ramen_ratings
+# pipe in the data from ramen ratings dataset
 ramen_ratings %>%
   # drop rows with no answer available for stars
    drop_na(stars) %>%
   # filter the country to be Japan
   filter(country == "Japan") %>%
-  # select specific rows, in this case stars and country 
-  select(stars, country, style) %>% 
+  # select specific rows, in this case stars, country and style 
+  select(stars, country, style) %>%  
   # ggplot function
   ggplot() + 
   # places style on the x-axis
   aes(x = style) + 
   # makes a histogram
-  geom_histogram(stat = "count")
+  geom_histogram(stat = "count", color = "black",fill = "red") +
+  # adds a light theme
+  theme_bw()
   
 
 ```
 ### Answer
 
-In Japan, box is the style that is liked the least.
+In Japan, the star rating is the lowest for a box styled ramen. Therefore, box style is liked the least compared to ramen in a bowl, cup, pack or tray.
 
 
 <br><br>
 
 ## Question 2
 
-#### In China, what packaging style of ramen seems to be the favorite?
+#### In Japan, what is the distribtion of stars for bowl style ramen in the ramen ratings dataset?
 
 ### Methods
-```{r}
-# pipe in the data from ramen_ratings
+```{r Question 2}
+# pipe in data from ramen ratings dataset
 ramen_ratings %>%
-  # drops rows with no answers available for style
-  drop_na(style) %>%
-  # filters the country to be China
-  filter(country == "China") %>%
+  # filter country to be Japan and the style to be bowl
+  filter(country == "Japan", style == "Bowl") %>%
+  # keeps selected rows in this case, stars and style
+  select(stars, style) %>%
   # ggplot function
   ggplot() + 
-  # style on x axis  
-  aes(x = style) +
-  # make a histogram  
-  geom_bar(stat = "count", color = "black", fill = "pink") +
-  labs(x= "style") +
-  # add non-default theme of choice
+  # adds stars on x-axis  
+  aes(x = stars) +
+  # make a histogram and adds specific aesthetics that were selected in argument 
+  geom_histogram(bins = 15, color = "black", fill = "blue") +
+  # adds label to x-axis to be distribution of stars for bowl style ramen
+  labs(x= "distribution of stars for bowl style ramen") +
+  # adds a black and white theme
   theme_bw() 
 
 
 ```
 ### Answer
 
-In China, the ramen packaging style that most people seem to like is pack.
+According to the ramen ratings dataset, in Japan, the average distribution of bowl style of ramen has an average mean around 3.5 stars with a spread ranging from 0 to 5 stars.
 
 <br><br>
 
@@ -95,8 +101,9 @@ In China, the ramen packaging style that most people seem to like is pack.
 #### What brands of ramen does Australia have?
 
 ### Methods
-```{r}
-# pipe in the data from ramen_ratings
+```{r Question 3}
+
+# pipe in the data from ramen ratings dataset
 ramen_ratings %>%
   # drops rows with no answers available for brand
   drop_na(brand) %>%
@@ -106,12 +113,13 @@ ramen_ratings %>%
   select(brand) %>%
   # ggplot function
   ggplot() + 
-  # style on x axis  
+  # adds brand to be on x-axis  
   aes(x = brand) +
-  # make a histogram  
-  geom_bar(color = "black", fill = "pink") +
-  labs(x= "brand") +
-  # add non-default theme of choice
+  # make a bar graph and adds specific aesthestics that were selected in argument
+  geom_bar(color = "black", fill = " hot pink") +
+  # adds labels for the x-axis to be brand
+  labs(x= "brands of ramen in Australia") +
+  # adds a black and white theme
   theme_bw() 
 
 
@@ -125,26 +133,29 @@ The brands of ramen in Australia have are Fantastic, Maggi, Singa-Me, Suimin and
 
 ## Question 4
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### What is the distribution of stars for Myojo ramen in the ramen ratings dataset?
 
 ### Methods
-```{r}
-
-#ramen_ratings %>%
-  #drop_na(brand) %>%
-  #filter(brand = "Myojo") %>% 
-  #ggplot() + 
-  # style on x axis  
-  #aes(x = brand) +
-  # make a histogram  
-  #geom_bar(color = "black", fill = "pink") +
-  #labs(x= "brand") +
-  # add non-default theme of choice
-  #theme_bw()
-
+```{r Question 4}
+  # pipe in data from ramen ratings dataset
+  ramen_ratings %>%
+  # filters brand to be Myojo ramen
+  filter(brand == "Myojo") %>%
+  # keeps rows only for stars 
+  select(stars) %>%
+  # ggplot function
+  ggplot() + 
+  # puts stars variable on x-axis  
+  aes(x = stars) +
+  # makes a histogram and adds specific aesthetics that were selected in argument
+  geom_histogram(bins = 15, color = "black", fill = "purple") +
+  # adds label for a-axis to be stars for Myojo ramen
+  labs(x= "distribution of stars for Myojo ramen") +
+  # add black and white theme
+  theme_bw() 
 
 
 ```
 ### Answer
 
-Replace this text with your answer to your question.
+According to the ramen ratings dataset, the average distribution of stars for Myojo ramen has an average mean around 4 stars with a spread ranging from 0 to around 5.25 stars.
