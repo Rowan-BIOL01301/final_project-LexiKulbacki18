@@ -1,7 +1,7 @@
 ---
 title: "Final Project"
 subtitle: "Data Science for Biologists, Spring 2021"
-author: "Your name goes here"
+author: "Alexis Kulbacki"
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -12,6 +12,8 @@ editor_options:
 knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo = TRUE, include = TRUE)
 
 # Load all libraries you use HERE:
+# load library
+library(tidyverse)
 ```
 
 <br><br>
@@ -19,17 +21,45 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo = TRUE, include = TRUE)
 ## Introduction
 
 ```{r read-examine-data}
-
+# reading in the data 
+ramen_ratings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-04/ramen_ratings.csv")
 ```
 
 <br><br>
 
 ## Question 1
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### In Japan, what is the most frequent number of star ratings?
 
 ### Methods
+```{r}
+# view the data
+glimpse(ramen_ratings)
 
+# pipe in the data
+ramen_ratings %>%
+  # drop rows with no answer for stars
+   drop_na(stars) %>%
+  # filter the country to be Japan
+  filter(country == "Japan", style %in% c("cup", "pack", "tray", "bowl")) %>%
+  # select specific rows, in this case stars and country 
+  select(stars, country, style) -> ramen_data1
+
+# pipe in the wrangled data
+ramen_data1 %>%
+# ggplot function
+ggplot() + 
+  # style on x axis  
+  aes(x = style, y = stars) +
+  # make a histogram  
+  geom_col(color = "black", fill = "pink") +
+  labs(x= "number of stars") +
+  # add non-default theme of choice
+  theme_bw() -> ramen_histogram
+
+print(ramen_histogram)
+
+```
 ### Answer
 
 Replace this text with your answer to your question.
@@ -39,22 +69,56 @@ Replace this text with your answer to your question.
 
 ## Question 2
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### In China, what packaging style of ramen seems to be the favorite?
 
 ### Methods
+```{r}
 
+ramen_ratings %>%
+  drop_na(style) %>%
+  filter(country == "China") -> ramendata2
+
+ramendata2 %>%
+ggplot() + 
+  # style on x axis  
+  aes(x = style) +
+  # make a histogram  
+  geom_bar(stat = "count", color = "black", fill = "pink") +
+  labs(x= "style") +
+  # add non-default theme of choice
+  theme_bw() 
+
+
+
+```
 ### Answer
 
-Replace this text with your answer to your question.
+In China, the ramen packaging style that most people seem to like is pack.
 
 <br><br>
 
 ## Question 3
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### Between the three brands of ramen Yum Yum, Nagatanien, Acecook, what is the most frequently sold.
 
 ### Methods
+```{r}
 
+#ramen_ratings %>%
+  #drop_na(brand) %>%
+  #filter(country == Thailand, brand == "Yum Yum", "	Nagatanien") 
+  #select(country, brand) %>%
+  #ggplot() + 
+  # style on x axis  
+  #aes(x = brand) +
+  # make a histogram  
+  #geom_bar(color = "black", fill = "pink") +
+  #labs(x= "brand") +
+  # add non-default theme of choice
+  #theme_bw() 
+
+
+```
 ### Answer
 
 Replace this text with your answer to your question.
@@ -67,7 +131,12 @@ Replace this text with your answer to your question.
 #### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
 
 ### Methods
+```{r}
 
+
+
+
+```
 ### Answer
 
 Replace this text with your answer to your question.
