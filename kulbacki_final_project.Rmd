@@ -23,9 +23,16 @@ library(tidyverse)
 
 ## Introduction
 
+The ramen ratings dataset includes ramen data gathered by brand, variety, style, country, stars, and review number. I chose ramen ratings because it liked the variables within the dataset. The variables that sparked my interest are brand, country, variety, and style. These peeked my interest enabling critical thinking questions that I want to ask and find out from the dataset using graphs. 
+[ramen dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-06-04)
+
 ```{r read-examine-data}
 # reading in the data 
 ramen_ratings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-04/ramen_ratings.csv")
+
+# view the data
+glimpse(ramen_ratings)
+
 ```
 
 <br><br>
@@ -36,8 +43,6 @@ ramen_ratings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascie
 
 ### Methods
 ```{r Question 1}
-# view the data
-glimpse(ramen_ratings)
 
 # pipe in the data from ramen ratings dataset
 ramen_ratings %>%
